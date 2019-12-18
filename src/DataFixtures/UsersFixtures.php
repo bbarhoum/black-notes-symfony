@@ -14,6 +14,9 @@ class UsersFixtures extends Fixture
      */
     private $encoder;
 
+    public const ADMIN_USER_REFERENCE = 'admin-user';
+    public const USER_REFERENCE = 'user';
+
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
         $this->encoder = $encoder;
@@ -21,15 +24,16 @@ class UsersFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        foreach ($this->getUsersData() as [$username, $firstName, $lastName, $email]) {
+        foreach ($this->getUsersData() as [$username, $firstName, $lastName, $email, $reference]) {
             $user = new User();
             $user->setUsername($username)
                 ->setFirstName($firstName)
                 ->setLastName($lastName)
                 ->setEmail($email)
                 ->setPassword($this->encoder->encodePassword($user, $username));
-
             $manager->persist($user);
+
+            $this->addReference($reference, $user);
         }
         $manager->flush();
     }
@@ -37,8 +41,8 @@ class UsersFixtures extends Fixture
     private function getUsersData(): array
     {
         return [
-            ['user', 'User', 'Name', 'user@email.com'],
-            ['admin', 'Admin', 'Name', 'admin@email.com'],
+            ['user', 'User', 'Name', 'user@email.com', self::USER_REFERENCE],
+            ['admin', 'Admin', 'Name', 'admin@email.com', self::ADMIN_USER_REFERENCE],
         ];
     }
 }

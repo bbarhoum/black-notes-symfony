@@ -1,6 +1,7 @@
 @import "~bootswatch/dist/flatly/variables";
-@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/scss/bootstrap.scss";
 @import "~bootswatch/dist/flatly/bootswatch";
+@import "~flatpickr/dist/flatpickr.css";
 
 body {
     background-color: lightgray;

@@ -1,27 +1,28 @@
+{% set routes = {
+  'app_dashboard': {'label': 'Dashboard'},
+  'todo_index': {'label': 'Todos'}
+} %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#">BlackNotes</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ path('app_dashboard') }}">Dashboard <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Todos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Notes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Keep</a>
-      </li>
+      {% for name, route in routes %}
+        <li class="nav-item {% if name is same as(app.request.get('_route')) %}active{% endif %}">
+          <a class="nav-link" href="{{ path(name) }}">{{ route.label }}
+            {% if name is same as(app.request.get('_route')) %}<span class="sr-only">(current)</span>{% endif %}
+          </a>
+        </li>
+      {% endfor %}
     </ul>
     <ul class="navbar-nav flaot-right">
       <li class="nav-item">
         <a class="nav-link" href="{{ path('app_logout') }}">Logout <span class="sr-only">(current)</span></a>
       </li>
+    </ul>
   </div>
 </nav>
