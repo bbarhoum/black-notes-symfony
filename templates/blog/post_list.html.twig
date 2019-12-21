@@ -1,0 +1,19 @@
+<div class="card-columns">
+  {% for post in posts %}
+    <div class="card">
+      <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title|capitalize }}">
+      <div class="card-body">
+        <h5 class="card-title">
+          <a href="{{ path('blog_show_post', {post: post.id}) }}">
+            {{ post.title|capitalize }}
+          </a>
+        </h5>
+        <p class="card-text">{{ post.description|capitalize }}</p>
+        <p class="card-text row">
+          <small class="text-muted col">By: {{ post.createdBy }}</small>
+          <small class="text-muted col">Last updated: 3 mins ago</small>
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+</div>

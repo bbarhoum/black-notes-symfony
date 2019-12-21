@@ -31,6 +31,7 @@ class TodoController extends AbstractController
     public function new(Request $request): Response
     {
         $todo = new Todo();
+        $todo->setOwner($this->getUser());
         $form = $this->createForm(TodoType::class, $todo);
         $form->handleRequest($request);
 

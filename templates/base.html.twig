@@ -9,12 +9,20 @@
     {{ encore_entry_link_tags('app') }}
   {% endblock %}
 </head>
-<body>
+<body class="bg-light">
 {% block header %}
-  {%  include 'layouts/header.html.twig' %}
+  {% include 'layouts/header.html.twig' %}
 {% endblock %}
-<main role="main" class="container">
-  {% block body %}{% endblock %}
+<main role="main" class="container p-4">
+  {% block body %}
+  <div class="row">
+    <div id="main" class="col-sm-9">
+      {% block main %}{% endblock %}
+    </div>
+    <div id="sidebar" class="col-3">
+      {% block sidebar %}{% endblock %}
+    </div>
+    {% endblock %}
 </main>
 {% block footer %}{% endblock %}
 {% block javascripts %}

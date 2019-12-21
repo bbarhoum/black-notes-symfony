@@ -12,19 +12,18 @@ class TodoFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $references = [
-            UsersFixtures::USER_REFERENCE,
-            UsersFixtures::ADMIN_USER_REFERENCE,
-        ];
-
         $faker = \Faker\Factory::create();
-        for ($i = 0; $i < random_int(20, 40); $i++) {
+        for ($i = 0; $i < rand(20, 40); $i++) {
             /** @var User $user */
-            $user = $this->getReference($references[array_rand($references, 1)]);
+            $user = $this->getReference('user_'.rand(0, 19));
+
             $todo = new Todo();
             $todo->setTitle($faker->sentence)
                 ->setDueDate($faker->dateTimeBetween('now', 'next year'))
-                ->setOwner($user);
+                ->setIsDone(rand(0, 1) === 1)
+                ->setOwner($user)
+                ->setCreatedAt($faker->dateTimeBetween('last year', 'next year'));
+
             $manager->persist($todo);
         }
 

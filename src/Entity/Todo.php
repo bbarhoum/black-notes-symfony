@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
+use App\Traits\Entity\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TodoRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Todo
 {
+    use TimestampableTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

@@ -1,4 +1,18 @@
-{{ form_start(form, {'action': path('todo_edit', {id: todo.id})}) }}
-    {{ form_widget(form.title) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{% if todo.id is not null %}
+  {% set action =  path('todo_edit', {id: todo.id}) %}
+{% else %}
+  {% set action =  path('todo_new') %}
+{% endif %}
+
+{{ form_start(form, {'action': action}) }}
+<div class="add-items d-flex">
+    {{ form_widget(form.title, {attr: { placeholder: 'What do you need to do?', class: 'col-8'}}) }}
+    {{ form_widget(form.dueDate, {attr: { placeholder: 'When to do this?' , class: 'col'}}) }}
+    {{ form_widget(form) }}
+    {% if todo.id is null %}
+    <button class="add btn btn-primary font-weight-bold todo-list-add-btn">Add</button>
+  {% else %}
+    <button class="btn btn-success btn-sm">{{ button_label|default('Save') }}</button>
+  {% endif %}
+</div>
 {{ form_end(form) }}
