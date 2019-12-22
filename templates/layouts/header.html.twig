@@ -1,29 +1,58 @@
-{% set routes = {
+{% set admin_routes = {
   'app_dashboard': {'label': 'Dashboard'},
   'todo_index': {'label': 'Todos'},
   'post_index': {'label': 'Posts'},
 } %}
+{% set user_routes = {
+  'blog_index': {'label': 'Blog'},
+} %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">BlackNotes</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div class="container">
+    <a class="navbar-brand" href="#">BlackNotes</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      {% for name, route in routes %}
-        <li class="nav-item {% if name is same as(app.request.get('_route')) %}active{% endif %}">
-          <a class="nav-link" href="{{ path(name) }}">{{ route.label }}
-            {% if name is same as(app.request.get('_route')) %}<span class="sr-only">(current)</span>{% endif %}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-    <ul class="navbar-nav flaot-right">
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_logout') }}">Logout <span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+          {% for name, route in admin_routes %}
+            <li class="nav-item {% if name is same as(app.request.get('_route')) %}active{% endif %}">
+              <a class="nav-link" href="{{ path(name) }}">{{ route.label }}
+                {% if name is same as(app.request.get('_route')) %}<span class="sr-only">(current)</span>{% endif %}
+              </a>
+            </li>
+          {% endfor %}
+        {% endif %}
+
+        {% for name, route in user_routes %}
+          <li class="nav-item {% if name is same as(app.request.get('_route')) %}active{% endif %}">
+            <a class="nav-link" href="{{ path(name) }}">{{ route.label }}
+              {% if name is same as(app.request.get('_route')) %}<span class="sr-only">(current)</span>{% endif %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+      <ul class="navbar-nav flaot-right">
+        {% if app.user %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user" aria-hidden="true"></i> {{ app.user }}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Profile</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ path('app_logout') }}">Sign-out</a>
+            </div>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_login') }}"><i class="fa fa-sign-in-alt"></i> Log-in</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
   </div>
 </nav>

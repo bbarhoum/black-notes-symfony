@@ -1,0 +1,117 @@
+.posts-container {
+  max-width: 760px
+}
+
+@media (min-width: 40em) {
+  .posts-container {
+    font-size: 18px
+  }
+}
+
+.page, .post {
+  margin-bottom: 4em
+}
+
+.page-title, .post-title, .post-title a {
+  color: #303030
+}
+
+.page-title, .post-title {
+  margin-top: 0
+}
+
+.post-date {
+  display: block;
+  margin-top: -.5rem;
+  margin-bottom: 1rem;
+  color: #767676
+}
+
+.post a {
+  word-break: break-word
+}
+
+.related {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid #eee
+}
+
+.related-posts {
+  padding-left: 0;
+  list-style: none
+}
+
+.related-posts h3 {
+  margin-top: 0
+}
+
+.related-posts li small {
+  font-size: 75%;
+  color: #767676
+}
+
+.related-posts li a:hover {
+  color: #268bd2;
+  text-decoration: none
+}
+
+.related-posts li a:hover small {
+  color: inherit
+}
+
+.post > p:first-of-type {
+  font-size: 130%;
+  color: #495057
+}
+
+.post .embed-responsive {
+  margin-bottom: 2rem
+}
+
+.pagination {
+  overflow: hidden;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  color: #767676;
+  text-align: center
+}
+
+.pagination-item {
+  position: relative;
+  display: block;
+  padding: 1rem;
+  border: 1px solid #eee
+}
+
+.pagination-item:first-child {
+  margin-bottom: -1px
+}
+
+a.pagination-item:hover {
+  z-index: 2;
+  color: #fff;
+  text-decoration: none;
+  background-color: #007bff;
+  border-color: #007bff
+}
+
+@media (min-width: 30em) {
+  .pagination {
+    margin: 3rem 0
+  }
+  .pagination-item {
+    float: left;
+    width: 50%
+  }
+  .pagination-item:first-child {
+    margin-bottom: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px
+  }
+  .pagination-item:last-child {
+    margin-left: -1px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px
+  }
+}

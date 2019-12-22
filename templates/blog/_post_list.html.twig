@@ -4,14 +4,14 @@
       <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title|capitalize }}">
       <div class="card-body">
         <h5 class="card-title">
-          <a href="{{ path('blog_show_post', {post: post.id}) }}">
+          <a href="{{ path('blog_show_post', {slug: post.slug}) }}">
             {{ post.title|capitalize }}
           </a>
         </h5>
         <p class="card-text">{{ post.description|capitalize }}</p>
         <p class="card-text row">
-          <small class="text-muted col">By: {{ post.createdBy }}</small>
-          <small class="text-muted col">Last updated: 3 mins ago</small>
+          <small class="text-muted col"><i class="fa fa-user"></i> {{ post.createdBy }}</small>
+          <small class="text-muted col"><i class="fa fa-calendar"></i> {{ post.createdAt|format_datetime('medium', 'short', '', 'UTC') }}</small>
         </p>
       </div>
     </div>

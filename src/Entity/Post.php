@@ -44,6 +44,7 @@ class Post
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post", orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $comments;
 
@@ -52,6 +53,11 @@ class Post
      * @ORM\JoinColumn(nullable=false)
      */
     private $createdBy;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -150,6 +156,18 @@ class Post
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

@@ -9,11 +9,11 @@
     {{ encore_entry_link_tags('app') }}
   {% endblock %}
 </head>
-<body class="bg-light">
+<body class="">
 {% block header %}
   {% include 'layouts/header.html.twig' %}
 {% endblock %}
-<main role="main" class="container p-4">
+<main role="main" class="container p-4" style="min-height: 400px;">
   {% block body %}
   <div class="row">
     <div id="main" class="col-sm-9">
@@ -23,8 +23,11 @@
       {% block sidebar %}{% endblock %}
     </div>
     {% endblock %}
+  </div>
 </main>
-{% block footer %}{% endblock %}
+{% block footer %}
+  {% include 'layouts/footer.html.twig' %}
+{% endblock %}
 {% block javascripts %}
   {{ encore_entry_script_tags('app') }}
 {% endblock %}

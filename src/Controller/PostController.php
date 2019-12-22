@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Utils\Slugger;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,6 +39,7 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->setSlug(Slugger::slugify($post->getTitle()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
@@ -51,7 +54,8 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="post_show", methods={"GET"})
+     * @Route("/{slug}", name="post_show", methods={"GET"})
+     * @IsGranted("show", subject="post")
      */
     public function show(Post $post): Response
     {
@@ -62,6 +66,7 @@ class PostController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="post_edit", methods={"GET","POST"})
+     * @IsGranted("edit", subject="post")
      */
     public function edit(Request $request, Post $post): Response
     {
@@ -69,6 +74,7 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->setSlug(Slugger::slugify($post->getTitle()));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('post_index');
@@ -82,6 +88,7 @@ class PostController extends AbstractController
 
     /**
      * @Route("/{id}", name="post_delete", methods={"DELETE"})
+     * @IsGranted("delete", subject="post")
      */
     public function delete(Request $request, Post $post): Response
     {

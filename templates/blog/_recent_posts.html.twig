@@ -1,0 +1,14 @@
+<div class="mt-5">
+  <h3>Recent posts</h3>
+  <hr>
+  {% for post in posts %}
+    <h5>
+      <a href="{{ path('blog_show_post', {slug: post.slug}) }}">
+        {{ post.title|capitalize }}
+      </a>
+    </h5>
+    <p class="small">
+      By {{ post.createdBy }} on {{ post.createdAt|format_datetime('medium', 'short') }}
+    </p>
+  {% endfor %}
+</div>

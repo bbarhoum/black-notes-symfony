@@ -6,6 +6,7 @@ use App\Traits\Entity\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -56,16 +57,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Todo", mappedBy="owner", orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $todos;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="createdBy", orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $posts;
 

@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\User;
+use App\Utils\Slugger;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -25,7 +26,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
                 ->setImage($faker->imageUrl(680, 280))
                 ->setCreatedBy($user)
                 ->setCreatedAt($faker->dateTimeBetween('last year'));
-
+            $post->setSlug(Slugger::slugify($post->getTitle()));
             if (rand(0, 1) === 1) {
                 $post->setUpdatedAt(
                     $faker->dateTimeBetween('-'.$post->getCreatedAt()->diff(new \DateTime())->days.' days')
@@ -41,7 +42,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
                 $comment = new Comment();
                 $comment->setPost($post)
                     ->setCreatedBy($user)
-                    ->setContent('<p>'.implode('</p><p>', $faker->paragraphs(rand(1, 3))).'</p>')
+                    ->setContent(implode(' ', $faker->paragraphs(rand(1, 3))))
                     ->setCreatedAt(
                         $faker->dateTimeBetween('-'.$post->getCreatedAt()->diff(new \DateTime())->days.' days')
                     );

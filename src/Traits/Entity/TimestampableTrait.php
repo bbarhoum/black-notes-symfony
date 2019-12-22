@@ -69,7 +69,8 @@ trait TimestampableTrait
      */
     public function persist()
     {
-        $this->setCreatedAt(new \DateTime());
+        if (null === $this->getCreatedAt())
+            $this->setCreatedAt(new \DateTime());
     }
 
     /**
@@ -77,6 +78,7 @@ trait TimestampableTrait
      */
     public function update()
     {
-        $this->setUpdatedAt(new \DateTime());
+        if (null === $this->getUpdatedAt())
+            $this->setUpdatedAt(new \DateTime());
     }
 }

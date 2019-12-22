@@ -1,8 +1,10 @@
 @import "~bootswatch/dist/flatly/variables";
-@import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/flatly/bootswatch";
 @import "~flatpickr/dist/flatpickr.css";
 @import "~@fortawesome/fontawesome-free/css/all.css";
+
+@import "blog";
 
 .starter-template {
     padding: 3rem 1.5rem;

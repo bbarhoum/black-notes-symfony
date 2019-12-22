@@ -49,6 +49,7 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
             'username' => $request->request->get('username'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
+            'target_path' => $request->request->get('_target_path'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
@@ -90,12 +91,15 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        if ($targetPath = $request->get('_target_path')) {
+            return new RedirectResponse($targetPath);
+        }
+
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
 
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse('/');
     }
 
     protected function getLoginUrl()
