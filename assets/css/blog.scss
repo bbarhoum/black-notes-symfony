@@ -115,3 +115,24 @@ a.pagination-item:hover {
     border-bottom-right-radius: 4px
   }
 }
+
+.post-tags .label {
+  margin-right: 5px;
+}
+.post-tags .label-default {
+  background-color: #e9ecec;
+  color: #6D8283;
+  font-size: 16px;
+  margin-right: 10px;
+  padding: .4em 1em .5em;
+  border-radius: .3em;
+}
+.post-tags .label-default i {
+  color: #95A6A7;
+}
+.post-list .post-tags .label-default {
+  font-size: 14px;
+  margin-right: 4px;
+  padding: .2em .3em .3em;
+  border-radius: .2em;
+}

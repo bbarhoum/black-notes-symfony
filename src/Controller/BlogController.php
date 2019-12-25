@@ -6,6 +6,7 @@ use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
 use App\Repository\PostRepository;
+use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +20,13 @@ class BlogController extends AbstractController
     /**
      * @Route("/", name="blog_index")
      */
-    public function index(PostRepository $postRepository)
+    public function index(PostRepository $posts, TagRepository $tags, Request $request)
     {
-
-        $posts = $postRepository->findBy([], ['createdAt' => 'desc']);
+        $tag = null;
+        if ($request->query->has('tag')) {
+            $tag = $tags->findOneBy(['name' => $request->query->get('tag')]);
+        }
+        $posts = $posts->findLatest($tag);
 
         return $this->render('blog/index.html.twig', [
             'posts' => $posts

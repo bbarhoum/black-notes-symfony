@@ -22,6 +22,8 @@
   </div>
 
   {{ post.content|raw }}
+  <div class="clearfix"></div>
+  {{ include('blog/_post_tags.html.twig') }}
 {% endblock %}
 
 {% block sidebar %}

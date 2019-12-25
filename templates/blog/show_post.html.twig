@@ -14,6 +14,8 @@
     {{ post.content|raw }}
   </article>
   <div class="clearfix"></div>
+  {{ include('blog/_post_tags.html.twig') }}
+  <div class="clearfix"></div>
   <div class="mt-4 mb-4">
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
       {{ render(controller('App\\Controller\\BlogController::commentForm', {id: post.id})) }}

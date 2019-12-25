@@ -1,4 +1,4 @@
-<div class="card-columns">
+<div class="card-columns post-list">
   {% for post in posts %}
     <article class="card post">
       <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title|capitalize }}">
@@ -13,6 +13,8 @@
           <small class="text-muted col"><i class="fa fa-user"></i> {{ post.createdBy }}</small>
           <small class="text-muted col"><i class="fa fa-calendar"></i> {{ post.createdAt|format_datetime('medium', 'short', '', 'UTC') }}</small>
         </p>
+
+        {{ include('blog/_post_tags.html.twig') }}
       </div>
     </article>
   {% endfor %}
