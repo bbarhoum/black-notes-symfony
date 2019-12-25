@@ -1,8 +1,8 @@
-<div class="mt-5">
+<div class="mt-5 recent-post">
   <h3>Recent posts</h3>
   <hr>
   {% for post in posts %}
-    <h5>
+    <h5 class="post-title">
       <a href="{{ path('blog_show_post', {slug: post.slug}) }}">
         {{ post.title|capitalize }}
       </a>

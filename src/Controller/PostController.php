@@ -33,18 +33,18 @@ class PostController extends AbstractController
     public function new(Request $request): Response
     {
         $post = new Post();
-        $post->setCreatedBy($this->getUser());
 
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $post->setSlug(Slugger::slugify($post->getTitle()));
+            $post->setCreatedBy($this->getUser())
+                ->setSlug(Slugger::slugify($post->getTitle()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($post);
             $entityManager->flush();
 
-            return $this->redirectToRoute('post_index');
+            return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
         }
 
         return $this->render('post/new.html.twig', [
@@ -54,7 +54,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="post_show", methods={"GET"})
+     * @Route("/{id}", name="post_show", methods={"GET"})
      * @IsGranted("show", subject="post")
      */
     public function show(Post $post): Response
@@ -77,7 +77,7 @@ class PostController extends AbstractController
             $post->setSlug(Slugger::slugify($post->getTitle()));
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('post_index');
+            return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
         }
 
         return $this->render('post/edit.html.twig', [
@@ -92,7 +92,7 @@ class PostController extends AbstractController
      */
     public function delete(Request $request, Post $post): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($post);
             $entityManager->flush();

@@ -51,6 +51,7 @@ class UsersFixtures extends Fixture
     {
         $usersData = [
             ['admin', 'Admin', 'Name', 'admin@email.com', self::ADMIN_USER_REFERENCE, ['ROLE_ADMIN']],
+            ['user', 'User', 'Name', 'user@email.com', 'user_20', ['ROLE_USER']],
         ];
 
         for ($i = 0; $i < 20; $i++) {

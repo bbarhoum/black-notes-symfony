@@ -15,9 +15,9 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = \Faker\Factory::create();
-        for ($i = 0; $i < rand(40, 60); $i++) {
+        for ($i = 0; $i < 100; $i++) {
             /** @var User $user */
-            $user = $this->getReference('user_'.rand(0, 19));
+            $user = $this->getReference('user_'.rand(0, 20));
 
             $post = new Post();
             $post->setTitle($faker->sentence)
@@ -37,7 +37,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
 
             for ($j = 0; $j < rand(0, 20); $j++) {
                 /** @var User $user */
-                $user = $this->getReference('user_'.rand(0, 19));
+                $user = $this->getReference('user_'.rand(0, 20));
 
                 $comment = new Comment();
                 $comment->setPost($post)

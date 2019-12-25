@@ -3,7 +3,7 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block main %}
-  <div class="post">
+  <article class="post">
     <div class="mb-4">
       <h1 class="post-title fw-500">{{ post.title|capitalize }}</h1>
       <span class="metadata">Published by <strong>{{ post.createdBy }}</strong> on {{ post.createdAt|date }}</span>
@@ -11,10 +11,8 @@
     <picture>
       <img src="{{ post.image }}" class="card-img-top mb-4" alt="{{ post.title|capitalize }}">
     </picture>
-    <article>
-      {{ post.content|raw }}
-    </article>
-  </div>
+    {{ post.content|raw }}
+  </article>
   <div class="clearfix"></div>
   <div class="mt-4 mb-4">
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -23,7 +21,7 @@
       <div class="card">
         <div class="card-body">
           <div class="card-text text-center">
-            <a class="btn btn-success" href="{{ path('app_login', {'redirect_to': app.request.pathInfo}) }}">
+            <a class="btn btn-success login" href="{{ path('app_login', {'redirect_to': app.request.pathInfo}) }}">
               <i class="fa fa-sign-in" aria-hidden="true"></i> Please Login
             </a>
             to publish a comment
