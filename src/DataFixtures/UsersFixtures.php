@@ -25,12 +25,10 @@ class UsersFixtures extends Fixture
     {
         $this->encoder = $encoder;
         $this->faker = \Faker\Factory::create();
-
     }
 
     public function load(ObjectManager $manager)
     {
-
         foreach ($this->getUsersData() as [$username, $firstName, $lastName, $email, $reference, $roles]) {
             $user = new User();
             $user->setUsername($username)
