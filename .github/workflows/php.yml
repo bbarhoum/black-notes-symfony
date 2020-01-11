@@ -16,5 +16,11 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
 
+    - name: Prepare database
+      run: |
+        php bin/console --env=test doctrine:database:create
+        php bin/console --env=test doctrine:schema:create
+        php bin/console --env=test doctrine:fixtures:load
+
     - name: Run test suite
       run: php bin/phpunit
