@@ -18,9 +18,9 @@ jobs:
 
     - name: Prepare database
       run: |
-        php bin/console --env=test doctrine:database:create
-        php bin/console --env=test doctrine:schema:create
-        php bin/console --env=test doctrine:fixtures:load
+        php bin/console --env=test doctrine:database:create -n
+        php bin/console --env=test doctrine:schema:create -n
+        php bin/console --env=test doctrine:fixtures:load -n
 
     - name: Run test suite
       run: php bin/phpunit
