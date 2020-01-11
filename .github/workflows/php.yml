@@ -3,12 +3,24 @@ name: PHP Tests
 on: [push]
 
 jobs:
-  build:
+  coding-guidelines:
+    name: Coding Guidelines
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run friendsofphp/php-cs-fixer
+        run: php7.3 ./tools/php-cs-fixer fix --diff-format=udiff --dry-run --show-progress=dots --using-cache=no --verbose
+
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
 
     - name: Get Composer Cache Directory
       id: composer-cache
