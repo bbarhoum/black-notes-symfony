@@ -10,7 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
+    - name: Require PHP CS Fixer
+      run: composer global require friendsofphp/php-cs-fixer
+
     - name: Run php-cs-fixer
-      uses: docker://oskarstark/php-cs-fixer-ga
-      with:
-        args: --diff --dry-run
+      run: php-cs-fixer fix --dry-run src/
