@@ -1,2 +1,2 @@
 # black-notes-symfony
-testing symfony 5
+I created this app to test Symfony5's news features
