@@ -15,7 +15,6 @@ jobs:
       run: |
         echo "::set-output name=dir::$(composer config cache-files-dir)"
     - uses: actions/cache@v1
-      id: cache
       with:
         path: ${{ steps.composer-cache.outputs.dir }}
         key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -26,7 +25,6 @@ jobs:
       run: composer validate
 
     - name: Install composer dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
       run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: Get yarn cache
