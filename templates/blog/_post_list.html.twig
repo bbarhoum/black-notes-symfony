@@ -10,8 +10,14 @@
         </h5>
         <p class="card-text">{{ post.description|capitalize }}</p>
         <p class="card-text row">
-          <small class="text-muted col"><i class="fa fa-user"></i> {{ post.createdBy }}</small>
-          <small class="text-muted col"><i class="fa fa-calendar"></i> {{ post.createdAt|format_datetime('medium', 'short', '', 'UTC') }}</small>
+          <small class="text-muted col">
+            <a href="{{ path('blog_index', {'writer': post.createdBy.username}) }}">
+              <i class="fa fa-user"></i> {{ post.createdBy }}
+            </a>
+          </small>
+          <small class="text-muted col"><i
+                    class="fa fa-calendar"></i> {{ post.createdAt|format_datetime('medium', 'short', '', 'UTC') }}
+          </small>
         </p>
 
         {{ include('blog/_post_tags.html.twig') }}

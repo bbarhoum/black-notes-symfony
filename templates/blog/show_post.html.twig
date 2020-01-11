@@ -6,7 +6,8 @@
   <article class="post">
     <div class="mb-4">
       <h1 class="post-title fw-500">{{ post.title|capitalize }}</h1>
-      <span class="metadata">Published by <strong>{{ post.createdBy }}</strong> on {{ post.createdAt|date }}</span>
+      <span class="metadata">Published by <strong>
+          <a href="{{ path('blog_index', {'writer': post.createdBy.username}) }}"> {{ post.createdBy }} </a></strong> on {{ post.createdAt|date }}</span>
     </div>
     <picture>
       <img src="{{ post.image }}" class="card-img-top mb-4" alt="{{ post.title|capitalize }}">

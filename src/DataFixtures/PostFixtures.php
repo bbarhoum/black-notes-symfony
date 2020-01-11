@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Entity\Tag;
 use App\Entity\User;
 use App\Utils\Slugger;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -15,6 +16,16 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = \Faker\Factory::create();
+
+        $tags = [];
+        for ($x = 0; $x < 20; $x++) {
+            $tag = new Tag();
+            $tag->setName($faker->word);
+
+            $manager->persist($tag);
+            $tags[] = $tag;
+        }
+
         for ($i = 0; $i < 100; $i++) {
             /** @var User $user */
             $user = $this->getReference('user_'.rand(0, 20));
@@ -54,6 +65,11 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
                 }
 
                 $manager->persist($comment);
+            }
+
+            for ($x = 0; $x < random_int(0, 3); $x++) {
+                $tag = $tags[random_int(0, 19)];
+                $post->addTag($tag);
             }
         }
 
