@@ -23,9 +23,6 @@ class BlogController extends AbstractController
      */
     public function index(PostRepository $posts, TagRepository $tags, UserRepository $users, Request $request)
     {
-
-
-
         $tag = null;
         if ($request->query->has('tag')) {
             $tag = $tags->findOneBy(['name' => $request->query->get('tag')]);
