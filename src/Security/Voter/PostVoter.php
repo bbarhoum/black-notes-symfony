@@ -3,7 +3,6 @@
 
 namespace App\Security\Voter;
 
-
 use App\Entity\Post;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -11,7 +10,6 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class PostVoter extends Voter
 {
-
     public const DELETE = 'delete';
     public const EDIT = 'edit';
     public const SHOW = 'show';

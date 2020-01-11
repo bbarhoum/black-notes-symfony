@@ -266,6 +266,4 @@ class User implements UserInterface
     {
         return $this->firstName . ' ' . $this->lastName;
     }
-
-
 }

@@ -3,7 +3,6 @@
 
 namespace App\Form\Type;
 
-
 use App\Form\DataTransformer\TagArrayToStringTransformer;
 use App\Repository\TagRepository;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
@@ -37,6 +36,4 @@ class TagsInputType extends AbstractType
     {
         return TextType::class;
     }
-
-
 }

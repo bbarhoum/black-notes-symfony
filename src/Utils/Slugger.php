@@ -3,7 +3,6 @@
 
 namespace App\Utils;
 
-
 class Slugger
 {
     public static function slugify(string $string): string

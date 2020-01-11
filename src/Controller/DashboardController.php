@@ -16,7 +16,6 @@ class DashboardController extends AbstractController
      */
     public function index(PostRepository $postRepository)
     {
-
         $posts = $postRepository->findAll();
 
         return $this->render('dashboard/index.html.twig', [
