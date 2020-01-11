@@ -34,7 +34,6 @@ jobs:
       run: echo "::set-output name=dir::$(yarn cache dir)"
 
     - uses: actions/cache@v1
-      id: cache-yarn
       with:
         path: ${{ steps.yarn-cache.outputs.dir }}
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -42,7 +41,6 @@ jobs:
           ${{ runner.os }}-yarn-
 
     - name: Install yarn dependencies
-      if: steps.cache-yarn.outputs.cache-hit != 'true'
       run: yarn install --frozen-lockfile
 
     - name: Build encore
