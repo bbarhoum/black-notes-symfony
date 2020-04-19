@@ -30,7 +30,7 @@ class Post
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=1024)
      * @Assert\NotBlank(message="Description should not be blank.")
      */
     private $description;
