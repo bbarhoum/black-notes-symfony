@@ -73,7 +73,7 @@ jobs:
         php bin/console --env=test doctrine:fixtures:load -n
 
     - name: Start dev server
-      run: /home/runner/.symfony/bin/symfony serve
+      run: /home/runner/.symfony/bin/symfony serve &
 
     - name: Run test suite
       run: php bin/phpunit
