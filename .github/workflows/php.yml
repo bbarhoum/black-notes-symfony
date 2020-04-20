@@ -30,8 +30,7 @@ jobs:
     - name: Install Symfony
       run: |
         wget https://get.symfony.com/cli/installer -O - | bash
-        mv /home/runner/.symfony/bin/symfony /usr/local/bin/symfony
-        symfony -v
+        /home/runner/.symfony/bin/symfony -v
 
     - name: Get Composer Cache Directory
       id: composer-cache
@@ -74,7 +73,7 @@ jobs:
         php bin/console --env=test doctrine:fixtures:load -n
 
     - name: Start dev server
-      run: symfony serve
+      run: /home/runner/.symfony/bin/symfony serve
 
     - name: Run test suite
       run: php bin/phpunit
