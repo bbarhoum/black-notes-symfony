@@ -30,7 +30,7 @@ jobs:
     - name: Install Symfony
       run: |
         wget https://get.symfony.com/cli/installer -O - | bash
-        export PATH="$HOME/.symfony/bin:$PATH"
+        mv /home/runner/.symfony/bin/symfony /usr/local/bin/symfony
         symfony -v
 
     - name: Get Composer Cache Directory
