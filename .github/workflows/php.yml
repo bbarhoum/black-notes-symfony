@@ -29,7 +29,8 @@ jobs:
 
     - name: Install Symfony
       run: |
-        sudo wget https://get.symfony.com/cli/installer -O - | bash
+        wget https://get.symfony.com/cli/installer -O - | bash
+        symfony -v
 
     - name: Get Composer Cache Directory
       id: composer-cache
