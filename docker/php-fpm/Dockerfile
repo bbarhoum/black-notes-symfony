@@ -50,6 +50,19 @@ RUN cd /tmp && \
     yum install yarn -y && \
     yarn global add gulp
 
+# Unstall Chromium
+RUN wget https://chromedriver.storage.googleapis.com/83.0.4103.14/chromedriver_linux64.zip && \
+    unzip chromedriver_linux64.zip && \
+    rm chromedriver_linux64.zip && \
+    mv -f chromedriver /bin/chromedriver && \
+    yum install Xvfb -y && \
+    chromedriver --version
+
+# Unstall Chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm && \
+    yum install google-chrome-stable_current_x86_64.rpm -y && \
+    google-chrome --version
+
 # Link
 RUN ln -s /opt/remi/php74/root/bin/php /bin/php && \
     ln -s /opt/remi/php74/root/sbin/php-fpm /bin/php-fpm

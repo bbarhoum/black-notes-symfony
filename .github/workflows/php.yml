@@ -27,11 +27,6 @@ jobs:
         sudo apt-get install chromium-chromedriver \
         && chromedriver --version
 
-    - name: Install Symfony
-      run: |
-        wget https://get.symfony.com/cli/installer -O - | bash
-        /home/runner/.symfony/bin/symfony -v
-
     - name: Get Composer Cache Directory
       id: composer-cache
       run: |
@@ -71,9 +66,6 @@ jobs:
         php bin/console --env=test doctrine:database:create -n
         php bin/console --env=test doctrine:schema:create -n
         php bin/console --env=test doctrine:fixtures:load -n
-
-    - name: Start dev server
-      run: APP_ENV=test /home/runner/.symfony/bin/symfony server:start -d
 
     - name: Run test suite
       run: php bin/phpunit
