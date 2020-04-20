@@ -34,7 +34,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
             $post->setTitle($faker->sentence)
                 ->setDescription($faker->paragraph)
                 ->setContent('<p>'.implode('</p><p>', $faker->paragraphs(rand(3, 10))).'</p>')
-                ->setImage($faker->imageUrl(680, 280))
+                ->setImage($faker->imageUrl(170, 70))
                 ->setCreatedBy($user)
                 ->setCreatedAt($faker->dateTimeBetween('last year'));
             $post->setSlug(Slugger::slugify($post->getTitle()));

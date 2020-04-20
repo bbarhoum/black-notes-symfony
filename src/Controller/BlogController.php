@@ -21,7 +21,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/", name="blog_index")
      */
-    public function index(PostRepository $posts, TagRepository $tags, UserRepository $users, Request $request)
+    public function index(PostRepository $posts, TagRepository $tags, UserRepository $users, Request $request, $page = 1)
     {
         $tag = null;
         if ($request->query->has('tag')) {
@@ -33,7 +33,7 @@ class BlogController extends AbstractController
             $user = $users->findOneBy(['username' => $request->query->get('writer')]);
         }
 
-        $posts = $posts->findLatest($tag, $user);
+        $posts = $posts->findLatest($page, $tag, $user);
 
         return $this->render('blog/index.html.twig', [
             'posts' => $posts
