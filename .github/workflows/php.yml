@@ -22,6 +22,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Install ChromeDriver
+      run: |
+        apt-get install chromium-chromedriver \
+        && chromedriver --version
+
     - name: Get Composer Cache Directory
       id: composer-cache
       run: |
