@@ -10,7 +10,7 @@
           <a href="{{ path('blog_index', {'writer': post.createdBy.username}) }}"> {{ post.createdBy }} </a></strong> on {{ post.createdAt|date }}</span>
     </div>
     <picture>
-      <img src="{{ post.image }}" class="card-img-top mb-4" alt="{{ post.title|capitalize }}">
+{#      <img src="{{ post.image }}" class="card-img-top mb-4" alt="{{ post.title|capitalize }}">#}
     </picture>
     {{ post.content|raw }}
   </article>

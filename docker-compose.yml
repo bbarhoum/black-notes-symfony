@@ -1,0 +1,107 @@
+version: "3.7"
+###########################
+#     S E R V I C E S     #
+###########################
+services:
+  ###########
+  # PHP-FPM #
+  ###########
+  php-fpm:
+    build:
+      context: './docker/php-fpm/'
+      args:
+        host_user: ${HOST_USER}
+        host_group: ${HOST_GROUP}
+    depends_on:
+      - mysql
+    networks:
+      symfony-docker-dev.com:
+        aliases:
+          - "php-fpm"
+    volumes:
+      - ${PROJECT_ROOT}/:/var/www/html/
+      - $SSH_AUTH_SOCK:/ssh-auth.sock
+    environment:
+      COMPOSER_MEMORY_LIMIT: ${PHPFPM_COMPOSER_MEMORY_LIMIT}
+      SSH_AUTH_SOCK: ${PHPFPM_PATH_SSH_AUTH_SOCK}
+      SYMFONY_ENV: "${PHPFPM_SYMFONY_ENV}"
+  ###########
+  # Apache  #
+  ###########
+  www:
+    build:
+      context: './docker/apache/'
+      args:
+        host_user: ${HOST_USER}
+        host_group: ${HOST_GROUP}
+    depends_on:
+      - php-fpm
+    expose:
+      - "80"
+    networks:
+      symfony-docker-dev.com:
+        aliases:
+          - "www"
+    volumes:
+      - ${PROJECT_ROOT}/:/var/www/html/
+  #########
+  # MySql #
+  #########
+  mysql:
+    image: mysql:5.7
+    restart: always
+    networks:
+      symfony-docker-dev.com:
+        aliases:
+          - "mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DB_NAME}"
+      MYSQL_USER: "${MYSQL_DB_USERNAME}"
+      MYSQL_PASSWORD: "${MYSQL_DB_PASSWORD}"
+  ##############
+  # PhpMyAdmin #
+  ##############
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - mysql
+    restart: always
+    expose:
+      - "80"
+    networks:
+      symfony-docker-dev.com:
+        aliases:
+          - "phpmyadmin"
+    links:
+      - mysql:db
+    volumes:
+      - /sessions
+  ################
+  # Host-Manager #
+  ################
+  host-manager:
+    image: iamluc/docker-hostmanager
+    restart: always
+    networks:
+      symfony-docker-dev.com:
+        aliases:
+          - "host_manager"
+    volumes:
+      - ${HOSTMANAGER_PATH_DOCKER_SOCK}:/var/run/docker.sock
+      - ${HOSTMANAGER_PATH_HOST_FILE}:/hosts
+###########################
+#     N E T W O R K S     #
+###########################
+networks:
+  symfony-docker-dev.com:
+    name: "symfony-docker-dev.com"
+    ipam:
+      driver: default
+      config:
+        - subnet: ${PROJECT_SUBNET}
+#########################
+#     V O L U M E S     #
+#########################
+volumes:
+  data:

@@ -1,7 +1,7 @@
 <div class="card-columns post-list">
   {% for post in posts %}
     <article class="card post">
-      <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title|capitalize }}">
+{#      <img src="{{ post.image }}" class="card-img-top" alt="{{ post.title|capitalize }}">#}
       <div class="card-body">
         <h5 class="card-title">
           <a href="{{ path('blog_show_post', {slug: post.slug}) }}">

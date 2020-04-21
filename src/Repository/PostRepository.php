@@ -16,12 +16,14 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class PostRepository extends ServiceEntityRepository
 {
+    const PAGE_SIZE = 10;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Post::class);
     }
 
-    public function findLatest(Tag $tag = null, User $user = null)
+    public function findLatest(int $page = 1, Tag $tag = null, User $user = null)
     {
         $qb = $this->createQueryBuilder('p');
         $qb->orderBy('p.createdAt', 'desc');
@@ -37,6 +39,9 @@ class PostRepository extends ServiceEntityRepository
                 ->andWhere('u = :user')
                 ->setParameter('user', $user);
         }
+
+        $qb->setMaxResults(self::PAGE_SIZE)
+            ->setFirstResult(self::PAGE_SIZE * ($page - 1));
 
         return $qb->getQuery()->getResult();
     }
