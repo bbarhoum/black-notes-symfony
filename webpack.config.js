@@ -35,6 +35,8 @@ Encore
       "window.Bloodhound": require.resolve('bloodhound-js'),
       "jQuery.tagsinput": "bootstrap-tagsinput"
     })
+
+  .enableVueLoader()
 ;
 
 module.exports = Encore.getWebpackConfig();

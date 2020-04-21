@@ -12,7 +12,9 @@ import 'bootstrap-tagsinput'
 import Bloodhound from "bloodhound-js";
 require('typeahead.js')
 
-$(document).ready(function() {
+import '../front/main'
+
+  $(document).ready(function() {
   flatpickr('#todo_dueDate', {
     enableTime: true,
   })

@@ -6,6 +6,9 @@
         "node-sass": "^4.13.0",
         "regenerator-runtime": "^0.13.2",
         "sass-loader": "^7.0.1",
+        "vue": "^2.6.11",
+        "vue-loader": "^15.0.11",
+        "vue-template-compiler": "^2.6.11",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -19,6 +22,7 @@
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^16.0.0",
         "@yaireo/tagify": "^3.2.4",
+        "axios": "^0.19.2",
         "bloodhound-js": "^1.2.3",
         "bootstrap": "^4.4.1",
         "bootstrap-tagsinput": "^0.7.1",
@@ -28,6 +32,10 @@
         "flatpickr": "^4.6.3",
         "jquery": "^3.4.1",
         "popper.js": "^1.16.0",
-        "typeahead.js": "^0.11.1"
+        "register-service-worker": "^1.7.1",
+        "typeahead.js": "^0.11.1",
+        "vue-router": "^3.1.6",
+        "vuetify": "^2.2.19",
+        "vuex": "^3.1.3"
     }
 }
