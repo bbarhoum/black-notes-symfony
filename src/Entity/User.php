@@ -7,11 +7,15 @@ use App\Traits\Entity\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"read", "extra"}},
+ *     denormalizationContext={"groups"={"write"}}
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -28,11 +32,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"read", "write"})
      */
     private $username;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"read", "write"})
      */
     private $roles = [];
 
@@ -44,34 +50,40 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read", "write"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read", "write"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"read", "write"})
      */
     private $birthDate;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email()
+     * @Groups({"read", "write"})
      */
     private $email;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Todo", mappedBy="owner", orphanRemoval=true)
      * @ORM\OrderBy({"createdAt" = "DESC"})
+     * @Groups({"extra"})
      */
     private $todos;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="createdBy", orphanRemoval=true)
      * @ORM\OrderBy({"createdAt" = "DESC"})
+     * @Groups({"extra"})
      */
     private $posts;
 

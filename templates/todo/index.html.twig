@@ -8,24 +8,5 @@
 
 {% block body %}
   <h1>Todo index</h1>
-  <div class="row container d-flex justify-content-center">
-    <div class="col-lg-12">
-      <div class="card px-3">
-        <div class="card-body">
-          <h4 class="card-title">Awesome Todo list</h4>
-          {{ render(controller('App\\Controller\\TodoController::new')) }}
-          <div class="list-wrapper">
-            <ul class="d-flex flex-column-reverse todo-list">
-              {% for todo in todos %}
-                <li>
-                  {{ render(controller('App\\Controller\\TodoController::edit', {id: todo.id})) }}
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div id="app"></div>
 {% endblock %}

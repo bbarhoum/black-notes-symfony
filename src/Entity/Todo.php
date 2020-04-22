@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Annotation\UserAware;
 use App\Traits\Entity\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\TodoRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UserAware(userFieldName="owner_id")
  */
 class Todo
 {

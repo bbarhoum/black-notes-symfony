@@ -32,11 +32,11 @@ Encore
     .enableSassLoader()
     .autoProvidejQuery()
     .autoProvideVariables({
-      "window.Bloodhound": require.resolve('bloodhound-js'),
-      "jQuery.tagsinput": "bootstrap-tagsinput"
+        "window.Bloodhound": require.resolve('bloodhound-js'),
+        "jQuery.tagsinput": "bootstrap-tagsinput"
     })
 
-  .enableVueLoader()
+    .enableVueLoader()
 ;
 
 module.exports = Encore.getWebpackConfig();

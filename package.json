@@ -5,6 +5,7 @@
         "core-js": "^3.0.0",
         "node-sass": "^4.13.0",
         "regenerator-runtime": "^0.13.2",
+        "sass": "^1.26.3",
         "sass-loader": "^7.0.1",
         "vue": "^2.6.11",
         "vue-loader": "^15.0.11",
