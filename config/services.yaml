@@ -31,3 +31,8 @@ services:
             - { name: kernel.event_listener, event: kernel.request, priority: 5 }
         # Autoconfiguration must be disabled to set a custom priority
         autoconfigure: false
+
+    App\Swagger\SwaggerDecorator:
+        decorates: 'api_platform.swagger.normalizer.documentation'
+        arguments: ['@App\Swagger\SwaggerDecorator.inner']
+        autoconfigure: false

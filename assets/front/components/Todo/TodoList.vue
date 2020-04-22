@@ -34,21 +34,38 @@
         newTodo: {
           title: '',
           dueDate: null
-        }
+        },
+        token: ''
       }
     },
     mounted() {
-      this.loadTodos()
+      this.getToken().then(() => this.loadTodos())
     },
     methods: {
+      getToken() {
+        return axios.get("http://www.symfony-docker-dev.com/authentication_token")
+          .then(result => {
+            this.token = result.data.token
+          })
+      },
       loadTodos() {
-        axios.get("http://www.symfony-docker-dev.com/api/todos?page=1")
+        let config = {
+          headers: {
+            'Authorization': 'Bearer '+this.token
+          }
+        }
+        axios.get("http://www.symfony-docker-dev.com/api/todos?page=1", config)
           .then(result => {
             this.todos = result.data['hydra:member']
           })
       },
       addTodo(todo) {
-        axios.post("http://www.symfony-docker-dev.com/api/todos", todo)
+        let config = {
+          headers: {
+            'Authorization': 'Bearer '+this.token
+          }
+        }
+        axios.post("http://www.symfony-docker-dev.com/api/todos", todo, config)
           .then(result => {
             this.loadTodos()
             this.newTodo = {

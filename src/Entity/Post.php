@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
- * @UserAware(userFieldName="owner_id")
+ * @UserAware(userFieldName="created_by_id")
  */
 class Post
 {
