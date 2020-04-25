@@ -15,7 +15,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class AddOwnerSubscriber implements EventSubscriberInterface
 {
-
     private TokenStorageInterface $tokenStorage;
 
     public function __construct(TokenStorageInterface $tokenStorage)
