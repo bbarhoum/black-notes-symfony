@@ -2,12 +2,17 @@
 
 namespace App\Tests;
 
+use App\DataFixtures\PostFixtures;
+use App\DataFixtures\TodoFixtures;
+use App\DataFixtures\UsersFixtures;
+use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class BaseWebTestCase extends WebTestCase
 {
+    use FixturesTrait;
+
     protected $client = null;
-    protected $doctrine = null;
 
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -20,6 +25,7 @@ class BaseWebTestCase extends WebTestCase
         $this->em = $this->client->getContainer()
             ->get('doctrine')
             ->getManager();
+        $this->loadFixtures([PostFixtures::class, TodoFixtures::class, UsersFixtures::class]);
     }
 
     protected function tearDown(): void

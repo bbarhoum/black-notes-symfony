@@ -77,7 +77,7 @@ class BlogControllerTest extends BaseWebTestCase
             'password' => 'admin',
         ]);
 
-        $crawler = $this->client->submit($form);
+        $this->client->submit($form);
 
         $crawler = $this->client->followRedirect();
 
@@ -91,7 +91,7 @@ class BlogControllerTest extends BaseWebTestCase
             'comment[content]' => 'New test comment',
         ]);
 
-        $crawler = $this->client->submit($form);
+        $this->client->submit($form);
         $crawler = $this->client->followRedirect();
 
         $this->assertCount(
